@@ -1,4 +1,4 @@
-# Anki PTSI Collaboration
+# Flashcards PTSI collaboratives
 ## Pourquoi un repo ?
 J'avais déjà commencé à créer des packs Anki pour mon utilisation personnelle. Je me suis dit pourquoi pas les partager à qui veut et en a besoin. 
 
