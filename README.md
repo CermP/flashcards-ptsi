@@ -29,4 +29,3 @@ De plus, créer un repo permet à n'importe qui de participer à ce projet. C'es
 2. Installez les dépendances Python : `pip install -r requirements.txt`
 3. Installez AnkiConnect (addon Anki).
 4. Lancez Anki.
-5. Relancez le script d'export.
