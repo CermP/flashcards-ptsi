@@ -6,13 +6,20 @@ import shutil
 import html
 from pathlib import Path
 import re
+import unicodedata
 
 # --- CONFIGURATION ---
-OUTPUT_DIR = "../decks"
-MEDIA_DIR = "../media"
+# On récupère le dossier où se trouve le script actuel (scripts/)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# On définit la racine du projet (un dossier au dessus de scripts/)
+BASE_DIR = os.path.dirname(SCRIPT_DIR)
+
+# On définit les dossiers par rapport à la racine du projet
+OUTPUT_DIR = os.path.join(BASE_DIR, "decks")
+MEDIA_DIR = os.path.join(BASE_DIR, "media")
+
 ANKI_URL = "http://localhost:8765"
 ANKI_DB = os.path.expanduser("~/Library/Application Support/Anki2/Utilisateur 1/collection.anki2")
-ANKI_MEDIA_DB = os.path.expanduser("~/Library/Application Support/Anki2/Utilisateur 1/collection.media.db")
 ANKI_MEDIA_PATH = os.path.expanduser("~/Library/Application Support/Anki2/Utilisateur 1/collection.media")
 
 def request(action, **params):
@@ -28,6 +35,12 @@ def request(action, **params):
     except Exception as e:
         print(f"\n[ERREUR] Impossible de connecter à Anki : {e}")
         return None
+
+def slugify(value):
+    """Supprime les accents et caractères spéciaux"""
+    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
+    value = re.sub(r'[^\w\s-]', '', value).strip().lower()
+    return re.sub(r'[-\s]+', '_', value)
 
 def copy_media_files(source_text, deck_name, media_subfolder):
     """
@@ -115,7 +128,7 @@ def main():
         
         # Déterminer le dossier média (utiliser le premier mot du deck)
         # Ex: "PTSI::Maths" -> "maths"
-        media_subfolder = deck.split("::")[-1].lower().replace(" ", "_")
+        media_subfolder = slugify(deck.split("::")[-1])
         
         find_notes = request("findNotes", query=f'"deck:{deck}"')
         notes_info = request("notesInfo", notes=find_notes["result"])
