@@ -10,6 +10,17 @@ DECKS_DIR = "../decks"
 MEDIA_DIR = "../media"
 ANKI_URL = "http://localhost:8765"
 
+# Fonction pour trouver tous les CSV récursivement
+def find_all_csvs(root_dir):
+    csv_files = []
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        for filename in filenames:
+            if filename.endswith('.csv'):
+                # On garde le chemin relatif complet (ex: "maths/analyse/chap1.csv")
+                rel_path = os.path.relpath(os.path.join(dirpath, filename), root_dir)
+                csv_files.append(rel_path)
+    return sorted(csv_files)
+
 def request(action, **params):
     """
     Communique avec Anki via AnkiConnect.
@@ -251,7 +262,7 @@ def main():
     
     csv_files = []
     if os.path.exists(DECKS_DIR):
-        csv_files = sorted([f for f in os.listdir(DECKS_DIR) if f.endswith('.csv')])
+        csv_files = find_all_csvs(DECKS_DIR)
     
     if not csv_files:
         print(f"\n❌ Aucun fichier CSV trouvé dans {DECKS_DIR}")
@@ -282,8 +293,10 @@ def main():
     
     for csv_filename in target_files:
         csv_path = os.path.join(DECKS_DIR, csv_filename)
-        deck_name = csv_filename.replace('.csv', '').replace('-', '::').replace('_', ' ')
-        target_dir = get_media_folder_for_csv(csv_filename)
+        # Extraire uniquement le nom du fichier (sans le chemin) pour le deck_name
+        filename_only = os.path.basename(csv_filename)
+        deck_name = filename_only.replace('.csv', '').replace('-', '::').replace('_', ' ')
+        target_dir = get_media_folder_for_csv(filename_only)
         
         print(f"📥 Import de '{csv_filename}'...")
         print(f"   → Dossier média : {target_dir}")
