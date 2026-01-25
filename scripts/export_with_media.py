@@ -133,8 +133,28 @@ def main():
         find_notes = request("findNotes", query=f'"deck:{deck}"')
         notes_info = request("notesInfo", notes=find_notes["result"])
         
-        safe_name = deck.replace("::", "-").replace(" ", "_").replace("/", "-")
-        filename = os.path.join(OUTPUT_DIR, f"{safe_name}.csv")
+            # On découpe le nom du deck
+        parts = deck.split("::")
+
+        # Cas 1 : Deck seul (ex: "Vocabulaire")
+        if len(parts) == 1:
+            matiere = "divers"
+            safe_filename = slugify(parts[0])
+        # Cas 2 : Deck avec sous-paquets (ex: "SI::Cycle5::Torseur")
+        else:
+            # La matière est toujours le premier mot
+            matiere = slugify(parts[0])
+            # Le nom du fichier est la suite, jointe par des underscores
+            safe_filename = "_".join([slugify(p) for p in parts[1:]])
+
+        # Création du dossier par matière : decks/matiere/
+        # (matiere sera "si", "maths", "anglais", etc.)
+        matiere_dir = os.path.join(OUTPUT_DIR, matiere)
+        os.makedirs(matiere_dir, exist_ok=True)
+
+        # Nom final du fichier CSV
+        filename = os.path.join(matiere_dir, f"{safe_filename}.csv")
+
         
         try:
             with open(filename, "w", encoding="utf-8-sig", newline="") as f:
