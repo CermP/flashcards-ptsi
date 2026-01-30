@@ -29,7 +29,11 @@ anki-ptsi/
 
 Les fichiers `.apkg` sont **générés automatiquement** à chaque mise à jour du repo !
 
-### 👉 Méthode rapide :
+### 👉 Lien de téléchargement direct (Dernière version)
+[**📥 Télécharger tous les decks (.zip)**](https://nightly.link/CermP/anki-ptsi/workflows/build_decks.yml/main/anki-decks.zip)
+_(Ce lien pointe toujours vers la version la plus récente générée par GitHub Actions)_
+
+### 👉 Méthode manuelle (si le lien ne fonctionne pas) :
 
 1. Va dans l'onglet **[Actions](https://github.com/CermP/anki-ptsi/actions)** du repo
 2. Clique sur le dernier workflow réussi (✅ vert)
