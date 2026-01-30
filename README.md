@@ -33,7 +33,7 @@ Si tu veux **contribuer** ou **modifier les decks en local** :
 ### Prérequis
 
 - **Anki** (desktop) installé
-- **AnkiConnect** (addon Anki n°2055492159)
+- **AnkiConnect** (addon Anki n°2055492159) lien : [AnkiConnect (addon)](https://ankiweb.net/shared/info/2055492159)
 - **Python 3.x** avec pip
 
 ### Étapes
@@ -99,6 +99,3 @@ python3 scripts/imports_decks.py
 - [AnkiConnect (addon)](https://ankiweb.net/shared/info/2055492159)
 - [Documentation Anki](https://docs.ankiweb.net/)
 
----
-
-**Bon courage pour la PTSI ! 🚀**
