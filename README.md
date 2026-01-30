@@ -4,24 +4,7 @@
 
 J'avais déjà commencé à créer des packs Anki pour mon utilisation personnelle. Je me suis dit pourquoi pas les partager à ceux qui les souhaitent et en ont besoin.
 
-De plus, créer un repo permet à n'importe qui de participer à ce projet. **C'est une invitation !** Si vous êtes en PTSI et que vous souhaitez ajouter vos cartes/decks ou corriger des cartes pour rendre ce repo encore plus merveilleux, ne vous gênez pas !
-
----
-
-## 📚 Structure du Projet
-
-```
-anki-ptsi/
-├── decks/          # Fichiers CSV des flashcards (organisés par matière)
-│   ├── Maths/
-│   ├── SI/
-│   ├── Chimie/
-│   └── Anglais/
-├── media/          # Images (schémas, graphiques) organisées par deck
-├── output/         # Fichiers .apkg générés (ignorés par git)
-├── scripts/        # Outils d'export/import/génération
-└── .github/        # CI/CD pour génération automatique
-```
+De plus, créer un repo permet à n'importe qui de participer à ce projet. **C'est une invitation !** Si vous êtes en PTSI et que vous souhaitez ajouter vos cartes/decks ou corriger des cartes pour rendre ce repo encore plus merveilleux, proposez vos cartes/decks !
 
 ---
 
@@ -100,18 +83,6 @@ python3 scripts/imports_decks.py
 
 ---
 
-## 🤖 Automatisation (CI/CD)
-
-Le workflow GitHub Actions génère automatiquement les `.apkg` :
-
-- **Quand ?** À chaque `push` sur `main`
-- **Où ?** Dans l'onglet **Actions** → **Artifacts**
-- **Durée de conservation** : 30 jours
-
-Tu peux aussi lancer manuellement le workflow depuis l'onglet Actions.
-
----
-
 ## 📝 Scripts Disponibles
 
 | Script | Description |
@@ -119,19 +90,6 @@ Tu peux aussi lancer manuellement le workflow depuis l'onglet Actions.
 | `export_with_media.py` | Exporte les decks Anki → CSV + images |
 | `imports_decks.py` | Importe les CSV du repo → Anki local |
 | `generate_apkg.py` | Génère des `.apkg` sans Anki (utilisé par la CI) |
-
----
-
-## 👥 Contribution
-
-Toute contribution est la bienvenue ! N'hésite pas à :
-
-- ➕ Ajouter de nouveaux decks
-- ✅ Corriger des erreurs
-- 📝 Améliorer la documentation
-- 💡 Proposer des améliorations
-
-Fork le projet, fais tes modifs, et ouvre une Pull Request !
 
 ---
 
