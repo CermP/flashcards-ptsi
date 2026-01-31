@@ -1,0 +1,27 @@
+﻿Le point \(M\) de coordonnées \((x,y)\) est appelé {{c1::point d'affixe \(z\)}};;
+Le vecteur \(\vec{u}\) de coordonnées \((x,y)\) est appelé {{c1::vecteur d'affixe \(z\)}};;
+Pour tout complexe \(z\), <br>\(\text{Re}(z)=\)<br>\(\text{Im}(z)=\);\(\text{Re}(z)=\frac{z+\bar{z}}{2}\)<br><br>\(\text{Im}(z)=\frac{z-\bar{z}}{2i}\);
+\(z+\bar{z}=\)<br>et \(z-\bar{z}=\);\(z+\bar{z}=2 \cdot \text{Re}(z)\)<br>et \(z-\bar{z}=2i \cdot\text{Im}(z)\);
+\(|z|=\);\(|z|= \sqrt{ \text{Re}(z)^2 + \text{Im}(z)^2}\)<br>\(|z|=\sqrt{z\cdot\bar{z}}\);
+\(|z|=1 \iff\);\(\bar{z}= \frac{1}{z}\);
+Inégalité triangulaire :;\(||z|-|z'|| \leq |z+z'| \leq |z| + |z'|\);
+\(z\in \mathbb{U} \iff\);\(z\in \mathbb{U} \iff \exists \, \theta \in \mathbb{R}, z = \cos \theta + i \cdot \sin \theta\), on le note \(e^{i \theta}\);
+Formule d'Euler<br>\(\cos \theta =\)<br>\(\sin \theta =\);\(\cos \theta =\frac{e^{i \theta}+e^{-i \theta}}{2}\)<br>Formules d'Euler<br>\(\sin \theta = \frac{e^{i \theta}-e^{-i \theta}}{2i}\);
+Formule de Moivre :<br>\(\left(e^{i \theta} \right)^n = \)<br>\(\left(\cos \theta + i \cdot \sin \theta \right)^n\) ;\(\left(e^{i \theta} \right)^n = e^{i \theta}\)<br>\(\left(\cos \theta + i \cdot \sin \theta \right)^n = \cos(n \theta) + i \cdot \sin(n \theta)\);
+\(e^{i \theta}=e^{i \theta'} \iff \);\(e^{i \theta}=e^{i \theta'} \iff \theta = \theta \ [2 \pi]\);
+\(j=\)<br>\(\bar{j}=\)<br>\(j^2=\);\(j=e^{i\frac{2\pi}{3}}\)<br>\(\bar{j}=e^{-i\frac{2\pi}{3}}\)<br>\(j^2=e^{-i\frac{\pi}{3}}\);
+Étape pour linéariser;i) Appliquer les formules d'Euler pour remplacer \(\cos x\) et \(\sin x\) par des \(e^{ix}\) et \(e^{-ix}\)<br>ii) Tout développer, si besoin avec la formule du binome<br>iii) Regrouper intelligemment les termes pour appliquer dans l'autre sens les formules d'Euler;
+Technique angle moitié :<br>\(e^{ip}+e^{iq}=\)<br>\(e^{ip}-e^{iq}=\);\(e^{ip}+e^{iq}=e^{i\frac{p+q}{2}}2\cos \left ( \frac{p+q}{2} \right )\)<br>\(e^{ip}-e^{iq}=e^{i\frac{p+q}{2}}2i\sin \left ( \frac{p-q}{2} \right )\)<br>Cas particulier :<br>\(1+e^{i\theta}=e^{i\frac{\theta}{2}} 2\cos \left ( \frac{\theta}{2} \right )\)<br>\(1+e^{i\theta}=e^{i\frac{\theta}{2}} \left( -2i\sin \left ( \frac{\theta}{2} \right )\right)\);
+Forme trigonométrique de \(z\);\(z= |z|e^{i\theta}\);
+Soit \(z=x+iy\),<br>\(\theta=\);\(\theta=\text{Arctan} \left( \frac{x}{y} \right)\);
+Soit \((E) \) l'équation d'inconnue \(z \in \mathbb{C}\) suivante : \(az^2+bz+c=0\),<br>avec \(a,b,c \in \mathbb{C}\), \(a \neq 0\).<br>Posons \(\Delta=b^2-4ac\). Soit \(\delta\) une racine carrée de \(\Delta\). (on a \(\Delta= \delta^2\))<br>L'ensemble des solutions de \((E)\)est :<br>{{c1::\(\left \{  \frac{-b + \delta}{2a} , \frac{-b - \delta}{2a}  \right \}\)}};;
+Soit \((E):az^2 + bz +c=0\)<br>\(z_1 \) et \(z_2\) sont des solutions de \((E) \iff\);"\(\begin{cases}
+z_1 + z_2 = -\frac{b}{a} \\
+z_1 z_2 = \frac{c}{a}
+\end{cases}\)";
+Il existe exactement \(n\) racines \(n\)ièmes de l'unité, qui sont les complexes suivants :;\(e^{i\frac{2k\pi}{n}}, k \in \{0,1, \dots,n-1 \}\);
+La somme des racines \(n\text{ièmes}\) de l'unité \(\omega\) est :<br>\(\sum_{k=0}^{n-1} \omega^k=\);\(\sum_{k=0}^{n-1} \omega^k=0\);
+Il existe \(n\) racine \(n\text{ièmes}\) de \(Z= \rho e^{i\theta}\), qui sont :;\[\sqrt[n] \rho e^{i\frac{\theta}{n}}e^{i\frac{2k\pi}{n}}, k \in \{ 0,\dots,n-1\}\]<br>;
+\(e^z=e^{z'} \iff\);\(z+z'+i2k\pi\);
+Soient \(A,B,C,D\) des points d'affixes respectives \(z_a,z_b,z_c,z_d\), avec \(A \neq B\) et \(C\neq D\)<br>\(\left( \vec{AB},\vec{CD} \right)=\);\(\left( \vec{AB},\vec{CD} \right)=\text{Arg} \left( \frac{z_d-z_c}{z_b-z_a} \right)\);
+Les vecteurs \(\vec{u}\) et \(\vec{u'}\) sont {{c1::colinéaires}} si et seulement si {{c2::\(\frac{z'}{z} \in \mathbb{R}\)}}<br>Les vecteurs \(\vec{u}\) et \(\vec{u'}\) sont {{c1::orthogonaux}} si et seulement si {{c2::\(\frac{z'}{z} \in i\mathbb{R}\)}};;
