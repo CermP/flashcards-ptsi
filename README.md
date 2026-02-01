@@ -1,13 +1,4 @@
 # 📚 Flashcards PTSI Collaboratives
-
-## 🎯 Pourquoi ce repo ?
-
-J'avais déjà commencé à créer des packs Anki pour mon utilisation personnelle. Je me suis dit pourquoi pas les partager à ceux qui les souhaitent et en ont besoin.
-
-De plus, créer un repo permet à n'importe qui de participer à ce projet. **C'est une invitation !** Si vous êtes en PTSI et que vous souhaitez ajouter vos cartes/decks ou corriger des cartes pour rendre ce repo encore plus merveilleux, proposez vos cartes/decks !
-
----
-
 ## 📥 Télécharger les Decks (sans Anki installé)
 
 Les fichiers `.apkg` sont **générés automatiquement** à chaque mise à jour du repo !
