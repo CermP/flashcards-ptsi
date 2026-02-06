@@ -111,7 +111,7 @@ def save_html(data):
             overflow: hidden;
         }}
         header {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #5e81ac 0%, #8fbcbb 100%);
             color: white;
             padding: 3rem 2rem;
             text-align: center;
@@ -149,8 +149,8 @@ def save_html(data):
             border: 2px solid transparent;
         }}
         .deck-item:hover {{
-            background: #e9ecef;
-            border-color: #667eea;
+            background: #e5e9f0;
+            border-color: #bf616a;
             transform: translateX(5px);
         }}
         .deck-info {{ flex: 1; }}
