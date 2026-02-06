@@ -98,7 +98,7 @@ def save_html(data):
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8fbcbb 0%, #5e81ac 100%);
             min-height: 100vh;
             padding: 2rem;
         }}
@@ -131,10 +131,10 @@ def save_html(data):
         .subject-section {{ margin-bottom: 2.5rem; }}
         .subject-title {{
             font-size: 1.5rem;
-            color: #667eea;
+            color: #2e3440;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #4c566a;
             font-weight: 600;
         }}
         .deck-list {{ display: flex; flex-direction: column; gap: 0.75rem; }}
@@ -157,7 +157,7 @@ def save_html(data):
         .deck-name {{ font-weight: 600; color: #2d3748; margin-bottom: 0.25rem; }}
         .deck-size {{ font-size: 0.875rem; color: #718096; }}
         .download-btn {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #bf616a;
             color: white;
             padding: 0.6rem 1.5rem;
             border-radius: 8px;
@@ -195,7 +195,7 @@ def save_html(data):
     <div class="container">
         <header>
             <h1>🎯 Decks Anki PTSI</h1>
-            <p class="subtitle">Téléchargez vos flashcards pour réviser efficacement</p>
+            <p class="subtitle">Téléchargez les packets, un click et c'est dans Anki !</p>
             <div class="stats">
                 <div class="stat-item">
                     <div class="stat-number">{total_decks}</div>
@@ -239,8 +239,8 @@ def save_html(data):
     html += '''
         </div>
         <footer>
-            <p>🚀 <a href="https://github.com/CermP/anki-ptsi" target="_blank">CermP/anki-ptsi</a> sur GitHub</p>
-            <p style="margin-top: 0.5rem;">🤝 Contributions bienvenues !</p>
+            <p><a href="https://github.com/CermP/anki-ptsi" target="_blank">CermP/anki-ptsi</a> sur GitHub</p>
+            <p style="margin-top: 0.5rem;">🤝 Contributions bienvenues -> rendez-vous sur github pour contribuer !</p>
         </footer>
     </div>
 </body>
