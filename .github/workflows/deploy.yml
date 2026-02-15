@@ -34,6 +34,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Debug - List repo structure
+        run: |
+          echo "=== pwd ==="
+          pwd
+          echo "=== decks/ contents ==="
+          find decks -type f | head -30
+          echo "=== docs/ contents ==="
+          find docs -type f | head -30
+          echo "=== .gitignore ==="
+          cat .gitignore
+      
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -49,19 +60,19 @@ jobs:
       - name: Generate index
         run: python scripts/generate_index.py
       
-      - name: Verify generated files
+      - name: Debug - Verify generated files
         run: |
-          echo "=== Files in docs/ ==="
-          ls -lh docs/
-          echo "=== .apkg files ==="
+          echo "=== All files in docs/ ==="
+          find docs -type f -ls
+          echo "=== .apkg count ==="
           find docs -name '*.apkg' | wc -l
+          echo "=== .apkg files ==="
+          find docs -name '*.apkg'
+          echo "=== docs/ total size ==="
+          du -sh docs/
       
-      - name: Ensure .apkg files are not gitignored
-        run: |
-          # Remove *.apkg from .gitignore so upload-pages-artifact includes them
-          sed -i '/\*\.apkg/d' .gitignore
-          echo "=== .gitignore after cleanup ==="
-          cat .gitignore
+      - name: Remove .apkg from gitignore for upload
+        run: sed -i '/\*\.apkg/d' .gitignore
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
