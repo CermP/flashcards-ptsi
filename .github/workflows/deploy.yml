@@ -3,6 +3,13 @@ name: Build and Deploy
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'decks/**'
+      - 'media/**'
+      - 'scripts/**'
+      - 'docs/css/**'
+      - 'docs/js/**'
+      - 'docs/assets/**'
   workflow_dispatch:
 
 permissions:
@@ -30,20 +37,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
       
       - name: Install dependencies
-        run: pip install genanki
+        run: pip install -r requirements.txt
       
       - name: Generate .apkg files
         run: python scripts/generate_apkg.py
       
       - name: Generate index
         run: python scripts/generate_index.py
-      
-      - name: List generated files
-        run: |
-          echo "=== Files in docs/ ==="
-          ls -lh docs/
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

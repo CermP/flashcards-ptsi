@@ -5,8 +5,6 @@ __pycache__/
 venv/
 .vscode/
 
-# Fichiers .apkg générés localement (non versionnés)
+# Fichiers .apkg générés (par le CI, pas besoin de les commiter)
 output/
 *.apkg
-# Mais on garde ceux dans docs/ pour GitHub Pages
-!docs/*.apkg
