@@ -5,340 +5,155 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="DmmybIY5FSzQJMfHe_74H2ciJW4PxvPLA-KXHtOE3_I" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anki PTSI - Decks de Révision Collaboratifs</title>
+    <title>Anki PTSI — Decks de Révision Collaboratifs</title>
     <meta name="description"
-        content="Téléchargez les decks Anki pour la PTSI : Maths, Physique, SI, et plus. Projet collaboratif par et pour les étudiants.">
+        content="Projet collaboratif de decks Anki pour la PTSI. Maths, Physique, SI, Chimie, Anglais. Mémorisez efficacement grâce à la répétition espacée.">
 
-    <!-- Link to external CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <header>
+<body class="landing-page">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="navbar-brand">Anki PTSI</a>
+            <div class="navbar-links">
+                <a href="index.html" class="nav-link active">Accueil</a>
+                <a href="decks.html" class="nav-link">Decks</a>
+                <a href="https://github.com/CermP/anki-ptsi" target="_blank" rel="noopener" class="nav-link nav-github">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="landing-hero">
         <div class="container hero-content">
-            <h1 class="hero-title">Anki PTSI</h1>
-            <p class="hero-subtitle">Mémorisez vos cours efficacement avec des decks pour la PTSI. <br>Maths, Physique,
-                SI... tout y est !</p>
-
-            <div class="search-container">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search-input" class="search-input"
-                    placeholder="Rechercher un chapitre, une matière... ( / )">
-            </div>
-
-            <div class="stats-container">
-                <div class="stat-badge">
-                    <strong>14</strong> Decks
-                </div>
-                <div class="stat-badge">
-                    <strong>4</strong> Matières
-                </div>
-                <div class="stat-badge">
-                    <strong>Collaboratif</strong> & Open Source
-                </div>
+            <div class="hero-badge">🎓 Projet collaboratif PTSI</div>
+            <h1 class="hero-title">Mémorisez vos cours.<br><span class="hero-highlight">Réussissez vos concours.</span></h1>
+            <p class="hero-subtitle">
+                Des decks Anki créés par et pour les étudiants de PTSI.<br>
+                Maths, Physique, SI, Chimie, Anglais — tout y est.
+            </p>
+            <div class="hero-actions">
+                <a href="decks.html" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Voir les decks
+                </a>
+                <a href="#contribuer" class="btn btn-secondary">
+                    Contribuer au projet
+                </a>
             </div>
         </div>
-    </header>
+    </section>
 
-    <div class="container main-content">
-        <div id="no-results" class="no-results" style="display: none;">❌ Aucun résultat trouvé pour votre recherche.
+    <!-- About Section -->
+    <section class="landing-about" id="about">
+        <div class="container">
+            <h2 class="section-title">Pourquoi Anki PTSI ?</h2>
+
+            <div class="about-grid">
+                <div class="about-card" data-reveal>
+                    <div class="about-icon">🧠</div>
+                    <h3>La répétition espacée, votre meilleure arme</h3>
+                    <p>
+                        En prépa, le volume de connaissances à maîtriser est immense. Théorèmes, formules, méthodes, démonstrations...
+                        La répétition espacée est la technique la plus efficace scientifiquement prouvée pour ancrer ces connaissances
+                        dans votre mémoire à long terme. Anki automatise ce processus : il vous montre les cartes au moment optimal,
+                        juste avant que vous ne les oubliez.
+                    </p>
+                </div>
+
+                <div class="about-card" data-reveal>
+                    <div class="about-icon">📚</div>
+                    <h3>Des decks conçus pour la PTSI</h3>
+                    <p>
+                        Chaque deck est structuré chapitre par chapitre, fidèle au programme officiel.
+                        Des définitions aux théorèmes en passant par les valeurs numériques à connaître par cœur,
+                        tout est organisé pour que vous puissiez réviser efficacement chaque matière.
+                        Maths, Physique, Chimie, SI, Anglais — la totalité du programme est couverte.
+                    </p>
+                </div>
+
+                <div class="about-card" data-reveal>
+                    <div class="about-icon">🤝</div>
+                    <h3>Un projet collaboratif et open source</h3>
+                    <p>
+                        Ce projet est né d'une conviction simple : les meilleurs outils de révision sont ceux
+                        que l'on construit ensemble. Chaque étudiant peut contribuer, corriger, améliorer les decks.
+                        Le code source est ouvert sur GitHub. Plus on est nombreux à participer,
+                        plus les decks deviennent complets et fiables.
+                    </p>
+                </div>
+
+                <div class="about-card" data-reveal>
+                    <div class="about-icon">🚀</div>
+                    <h3>Prenez de l'avance, sans effort supplémentaire</h3>
+                    <p>
+                        5 à 10 minutes par jour suffisent. Dans le métro, entre deux cours, avant de dormir.
+                        Anki s'adapte à votre rythme et transforme ces petits moments en un avantage considérable.
+                        Pendant que d'autres relisent leurs cours pour la dixième fois, vous, vous mémorisez vraiment.
+                        C'est la différence entre comprendre et savoir.
+                    </p>
+                </div>
+            </div>
+
+            <div class="about-quote" data-reveal>
+                <blockquote>
+                    « En prépa, ce n'est pas celui qui travaille le plus qui réussit,
+                    c'est celui qui retient le mieux. »
+                </blockquote>
+            </div>
         </div>
-        <section class="subject-section">
-            <div class="subject-header">
-                <span class="subject-icon"></span>
-                <h2 class="subject-title">Anglais</h2>
-            </div>
+    </section>
 
-            <div class="deck-grid">
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">vocabulary list</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 76.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Anglais-vocabulary_list.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-            </div>
-        </section>
-        <section class="subject-section">
-            <div class="subject-header">
-                <span class="subject-icon"></span>
-                <h2 class="subject-title">Chimie</h2>
-            </div>
+    <!-- Contribute Section -->
+    <section class="landing-contribute" id="contribuer">
+        <div class="container">
+            <h2 class="section-title">Participez au projet</h2>
+            <p class="section-subtitle">
+                Ce projet grandit grâce à vous. Corrigez une erreur, ajoutez un chapitre,
+                ou simplement partagez vos retours !
+            </p>
 
-            <div class="deck-grid">
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Acides et Bases à connaitre</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 52.2 KB</span>
-                        </div>
+            <div class="contribute-grid">
+                <a href="https://github.com/CermP/anki-ptsi" target="_blank" rel="noopener" class="contribute-card">
+                    <div class="contribute-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     </div>
-                    <a href="Chimie-Acides_et_Bases_à_connaitre.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-            </div>
-        </section>
-        <section class="subject-section">
-            <div class="subject-header">
-                <span class="subject-icon"></span>
-                <h2 class="subject-title">Maths</h2>
-            </div>
+                    <h3>GitHub</h3>
+                    <p>Contribuez directement au code, signalez des erreurs ou proposez des améliorations.</p>
+                    <span class="contribute-link">Voir le dépôt →</span>
+                </a>
 
-            <div class="deck-grid">
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Chapitre 13 - Systèmes linéaires et matrices</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 72.2 KB</span>
-                        </div>
+                <a href="mailto:merlin.claret@icloud.com" class="contribute-card">
+                    <div class="contribute-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </div>
-                    <a href="Maths-Chapitre 13 - Systèmes linéaires et matrices.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Chapitre 1.A. - Analyse Généralités</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 60.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-Chapitre_1.A._-_Analyse_Généralités.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Chapitre 1.B. - Premières fonctions usuelles</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 60.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-Chapitre_1.B._-_Premières_fonctions_usuelles.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Chapitre 11 Limites et continuité</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 72.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-Chapitre_11_Limites_et_continuité.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Chapitre 2 - Logique, raisonnements, calculs algébriques</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 52.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-Chapitre_2_-_Logique,_raisonnements,_calculs_algébriques.apkg" class="download-btn"
-                        download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Chapitre 3 - Nouvelles fonctions usuelles</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 60.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-Chapitre_3_-_Nouvelles_fonctions_usuelles.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Développements limités usuels en 0</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 52.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-Développements_limités_usuels_en_0.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Plans de cours</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 68.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-Plans_de_cours.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">chapitre 12 derivation</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 64.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-chapitre_12_derivation.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">chapitre 4 complexes</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 60.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="Maths-chapitre_4_complexes.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-            </div>
-        </section>
-        <section class="subject-section">
-            <div class="subject-header">
-                <span class="subject-icon"></span>
-                <h2 class="subject-title">Si</h2>
-            </div>
+                    <h3>Email</h3>
+                    <p>Envoyez vos decks, suggestions ou questions directement par email.</p>
+                    <span class="contribute-link">merlin.claret@icloud.com →</span>
+                </a>
 
-            <div class="deck-grid">
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">Cycle5-Valeurs et caractéristiques à connaitre</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 60.2 KB</span>
-                        </div>
+                <a href="https://github.com/CermP/anki-ptsi/issues" target="_blank" rel="noopener" class="contribute-card">
+                    <div class="contribute-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     </div>
-                    <a href="SI-Cycle5-Valeurs_et_caractéristiques_à_connaitre.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
-                <div class="deck-card">
-                    <div class="deck-info">
-                        <h3 class="deck-name">cycle6 torseur cinematique liaisons</h3>
-                        <div class="deck-meta">
-                            <span>📅 14/02/2026</span>
-                            <span>📦 60.2 KB</span>
-                        </div>
-                    </div>
-                    <a href="SI-cycle6_torseur_cinematique_liaisons.apkg" class="download-btn" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Télécharger
-                    </a>
-                </div>
+                    <h3>Signaler une erreur</h3>
+                    <p>Vous avez trouvé une erreur dans un deck ? Ouvrez une issue sur GitHub.</p>
+                    <span class="contribute-link">Ouvrir une issue →</span>
+                </a>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <p>Projet open source maintenu par <a href="https://github.com/CermP/anki-ptsi" target="_blank"
@@ -347,8 +162,6 @@
         </div>
     </footer>
 
-    <!-- Stats & Scripts -->
-    <script src="js/main.js"></script>
 </body>
 
 </html>
