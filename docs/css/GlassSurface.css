@@ -1,0 +1,60 @@
+/* ===== GLASS SURFACE UTILITIES ===== */
+
+/*
+ * Frosted-glass effect using backdrop-filter.
+ * Works in all modern browsers (Chrome, Safari, Firefox, Edge).
+ * Apply .glass to any element for the base effect.
+ * Use modifier classes for variants.
+ */
+
+.glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.02),
+        0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Lighter glass — more visible on dark backgrounds */
+.glass--light {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.03),
+        0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Subtle glass — barely visible, for badges and small elements */
+.glass--subtle {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Hover enhancement for glass cards */
+.glass--hover:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(136, 192, 208, 0.25);
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+        0 12px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+
+    .glass,
+    .glass--light,
+    .glass--subtle {
+        background: rgba(59, 66, 82, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}

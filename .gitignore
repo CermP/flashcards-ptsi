@@ -8,3 +8,4 @@ venv/
 # Fichiers .apkg générés (par le CI, pas besoin de les commiter)
 output/
 *.apkg
+node_modules

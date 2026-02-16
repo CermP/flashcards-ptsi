@@ -1,0 +1,63 @@
+/* ===== IRIDESCENCE BACKGROUND ===== */
+
+#iridescence-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#iridescence-bg canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Fallback gradient when WebGL is not available */
+#iridescence-bg.iridescence-fallback {
+    background: linear-gradient(135deg,
+            #1a2a3a 0%,
+            #0d3b4f 25%,
+            #1a4a5a 50%,
+            #0a2a3a 75%,
+            #2e3440 100%);
+    background-size: 400% 400%;
+    animation: iridescence-fallback-shift 12s ease infinite;
+}
+
+@keyframes iridescence-fallback-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Respect reduced motion for fallback too */
+@media (prefers-reduced-motion: reduce) {
+    #iridescence-bg.iridescence-fallback {
+        animation: none;
+    }
+}
+
+/* Dark overlay to guarantee text readability over the animation */
+.iridescence-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: radial-gradient(ellipse at center,
+            rgba(46, 52, 64, 0.35) 0%,
+            rgba(46, 52, 64, 0.6) 100%);
+    pointer-events: none;
+}

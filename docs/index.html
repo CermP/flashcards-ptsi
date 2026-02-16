@@ -10,6 +10,8 @@
         content="Projet collaboratif de decks Anki pour la PTSI. Maths, Physique, SI, Chimie, Anglais. Mémorisez efficacement grâce à la répétition espacée.">
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/iridescence.css">
+    <link rel="stylesheet" href="css/GlassSurface.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,32 +20,39 @@
 
 <body class="landing-page">
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container navbar-inner">
-            <a href="index.html" class="navbar-brand">Anki PTSI</a>
-            <div class="navbar-links">
-                <a href="index.html" class="nav-link active">Accueil</a>
-                <a href="decks.html" class="nav-link">Decks</a>
-                <a href="https://github.com/CermP/anki-ptsi" target="_blank" rel="noopener" class="nav-link nav-github">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-            </div>
+    <!-- Glass Navbar -->
+    <nav class="glass-navbar">
+        <a href="index.html" class="glass-brand">
+            Anki PTSI
+        </a>
+        <div class="glass-nav-links">
+            <a href="index.html" class="glass-nav-link active">Accueil</a>
+            <a href="decks.html" class="glass-nav-link">Decks</a>
+            <a href="https://github.com/CermP/anki-ptsi" target="_blank" rel="noopener"
+                class="glass-nav-link">GitHub</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="landing-hero">
+        <div id="iridescence-bg" aria-hidden="true"></div>
+        <div class="iridescence-overlay" aria-hidden="true"></div>
         <div class="container hero-content">
             <div class="hero-badge">🎓 Projet collaboratif PTSI</div>
-            <h1 class="hero-title">Mémorisez vos cours.<br><span class="hero-highlight">Réussissez vos concours.</span></h1>
+            <h1 class="hero-title">Mémorisez vos cours.<br><span class="hero-highlight">Réussissez vos concours.</span>
+            </h1>
             <p class="hero-subtitle">
                 Des decks Anki créés par et pour les étudiants de PTSI.<br>
-                Maths, Physique, SI, Chimie, Anglais — tout y est.
+                Maths, Physique, SI, Chimie, Anglais, etc...
             </p>
             <div class="hero-actions">
                 <a href="decks.html" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
                     Voir les decks
                 </a>
                 <a href="#contribuer" class="btn btn-secondary">
@@ -61,12 +70,16 @@
             <div class="about-grid">
                 <div class="about-card" data-reveal>
                     <div class="about-icon">🧠</div>
-                    <h3>La répétition espacée, votre meilleure arme</h3>
+                    <h3>La répétition espacée, </h3>
                     <p>
-                        En prépa, le volume de connaissances à maîtriser est immense. Théorèmes, formules, méthodes, démonstrations...
-                        La répétition espacée est la technique la plus efficace scientifiquement prouvée pour ancrer ces connaissances
-                        dans votre mémoire à long terme. Anki automatise ce processus : il vous montre les cartes au moment optimal,
-                        juste avant que vous ne les oubliez.
+                        En prépa, le volume de connaissances à maîtriser est immense. Théorèmes, formules, méthodes,
+                        démonstrations...
+                        La répétition espacée est une technique efficace scientifiquement prouvée pour ancrer ces
+                        connaissances
+                        dans la mémoire à long terme. Anki automatise ce processus de répétition espacée : il vous
+                        montre les cartes au
+                        moment optimal,
+                        juste avant de les oublier.
                     </p>
                 </div>
 
@@ -74,10 +87,10 @@
                     <div class="about-icon">📚</div>
                     <h3>Des decks conçus pour la PTSI</h3>
                     <p>
-                        Chaque deck est structuré chapitre par chapitre, fidèle au programme officiel.
+                        Chaque deck est a été fait pour n'avoir qu'un objectif.
                         Des définitions aux théorèmes en passant par les valeurs numériques à connaître par cœur,
-                        tout est organisé pour que vous puissiez réviser efficacement chaque matière.
-                        Maths, Physique, Chimie, SI, Anglais — la totalité du programme est couverte.
+                        chaque deck est conçu pour être efficace.
+                        Maths, Physique, Chimie, SI, Anglais...
                     </p>
                 </div>
 
@@ -85,10 +98,13 @@
                     <div class="about-icon">🤝</div>
                     <h3>Un projet collaboratif et open source</h3>
                     <p>
-                        Ce projet est né d'une conviction simple : les meilleurs outils de révision sont ceux
-                        que l'on construit ensemble. Chaque étudiant peut contribuer, corriger, améliorer les decks.
+                        Ce projet est basé sur la conviction simple que les meilleurs outils de révision sont ceux
+                        que l'on construit ensemble. Chacun peut contribuer, corriger, améliorer les decks.
                         Le code source est ouvert sur GitHub. Plus on est nombreux à participer,
-                        plus les decks deviennent complets et fiables.
+                        plus les decks deviennent complets et fiables. N'hésitez pas à corriger les erreurs ou à
+                        faire des propositions de nouvelles cartes que vous pensez utiles. Aussi, si vous trouvez qu'un
+                        deck est trop long ou trop court, n'hésiter pas à envoyer un message ou ouvrir une issue sur
+                        GitHub.
                     </p>
                 </div>
 
@@ -96,18 +112,18 @@
                     <div class="about-icon">🚀</div>
                     <h3>Prenez de l'avance, sans effort supplémentaire</h3>
                     <p>
-                        5 à 10 minutes par jour suffisent. Dans le métro, entre deux cours, avant de dormir.
+                        10 à 20 minutes par jour suffisent. Dans le métro, entre deux cours, avant de dormir.
                         Anki s'adapte à votre rythme et transforme ces petits moments en un avantage considérable.
-                        Pendant que d'autres relisent leurs cours pour la dixième fois, vous, vous mémorisez vraiment.
-                        C'est la différence entre comprendre et savoir.
+                        Connaitre son cours par cœur, c'est un avantage considérable. C'est comme avoir une liste de
+                        commande qu'il suffit d'exécuter (ça ne remplace pas la méthode).
+
                     </p>
                 </div>
             </div>
 
             <div class="about-quote" data-reveal>
                 <blockquote>
-                    « En prépa, ce n'est pas celui qui travaille le plus qui réussit,
-                    c'est celui qui retient le mieux. »
+                    « Le génie, ça n’existe pas. Le vrai succès s’enracine dans le travail » -- Jacques Brel
                 </blockquote>
             </div>
         </div>
@@ -119,13 +135,17 @@
             <h2 class="section-title">Participez au projet</h2>
             <p class="section-subtitle">
                 Ce projet grandit grâce à vous. Corrigez une erreur, ajoutez un chapitre,
-                ou simplement partagez vos retours !
+                ou simplement partagez vos retours ! 🤓
             </p>
 
             <div class="contribute-grid">
                 <a href="https://github.com/CermP/anki-ptsi" target="_blank" rel="noopener" class="contribute-card">
                     <div class="contribute-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
                     </div>
                     <h3>GitHub</h3>
                     <p>Contribuez directement au code, signalez des erreurs ou proposez des améliorations.</p>
@@ -134,16 +154,26 @@
 
                 <a href="mailto:merlin.claret@icloud.com" class="contribute-card">
                     <div class="contribute-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
                     </div>
                     <h3>Email</h3>
                     <p>Envoyez vos decks, suggestions ou questions directement par email.</p>
                     <span class="contribute-link">merlin.claret@icloud.com →</span>
                 </a>
 
-                <a href="https://github.com/CermP/anki-ptsi/issues" target="_blank" rel="noopener" class="contribute-card">
+                <a href="https://github.com/CermP/anki-ptsi/issues" target="_blank" rel="noopener"
+                    class="contribute-card">
                     <div class="contribute-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
                     </div>
                     <h3>Signaler une erreur</h3>
                     <p>Vous avez trouvé une erreur dans un deck ? Ouvrez une issue sur GitHub.</p>
@@ -162,6 +192,8 @@
         </div>
     </footer>
 
+
+    <script type="module" src="js/iridescence.js"></script>
 </body>
 
 </html>
