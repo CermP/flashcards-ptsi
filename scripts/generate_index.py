@@ -143,7 +143,19 @@ def generate_html_content(data):
             <p class="hero-subtitle">Mémorisez vos cours efficacement.</p>
             
             <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Rechercher...">
+                <div class="search-control">
+                    <div class="search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5" style="width: 1.25rem; height: 1.25rem;">
+                          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input type="text" id="search-input" class="search-input" placeholder="Rechercher...">
+                    <div class="search-shortcut">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5" style="width: 1.25rem; height: 1.25rem;">
+                          <path fill-rule="evenodd" d="M12.528 3.047a.75.75 0 0 1 .449.961L8.433 16.504a.75.75 0 1 1-1.41-.512l4.544-12.496a.75.75 0 0 1 .961-.449Z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
             </div>
 
             <div class="stats-container">
@@ -188,7 +200,8 @@ def generate_html_content(data):
     </div>
     <footer>
         <div class="container">
-            <p>Projet open source par <a href="https://github.com/CermP/anki-ptsi">CermP</a></p>
+            <p>Projet open source maintenu par <a href="https://github.com/CermP/anki-ptsi" target="_blank" rel="noopener">CermP</a></p>
+            <p class="footer-note">Contribuez sur GitHub pour ajouter vos propres decks !</p>
         </div>
     </footer>
     <script src="js/main.js"></script>
