@@ -179,7 +179,10 @@ def generate_html_content(data):
         for subject in sorted(data.keys()):
             html += f'''
             <section class="subject-section">
-                <h2 class="subject-title">{subject}</h2>
+                <div class="subject-header">
+                    <span class="subject-icon"></span>
+                    <h2 class="subject-title">{subject}</h2>
+                </div>
                 <div class="deck-grid">'''
                 
             for deck in data[subject]:
