@@ -31,6 +31,31 @@
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+body.light-theme {
+    /* Light Theme Palette - Enhanced Contrast */
+    --bg-main: #f0f4f8;
+    /* Softer light gray for main bg */
+    --bg-card: #ffffff;
+    /* Pure white for cards to pop out */
+    --bg-card-hover: #e2e8f0;
+    /* Slight gray on hover */
+    --text-primary: #1e293b;
+    /* Dark slate for high contrast */
+    --text-secondary: #475569;
+    /* Medium slate for secondary text */
+    --text-muted: #64748b;
+    /* Muted slate */
+
+    --accent-primary: #3b82f6;
+    /* Vibrant blue for better contrast and modern look */
+    --accent-secondary: #2563eb;
+
+    /* Slightly stronger shadows for light mode */
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+}
+
 /* Base Styles */
 * {
     margin: 0;
@@ -101,10 +126,20 @@ a {
     transition: all 0.3s ease;
 }
 
+body.light-theme .glass-navbar {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 .glass-navbar:hover {
     background: rgba(46, 52, 64, 0.75);
     border-color: rgba(136, 192, 208, 0.3);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+body.light-theme .glass-navbar:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(59, 130, 246, 0.3);
 }
 
 .glass-brand {
@@ -145,10 +180,53 @@ a {
     background: rgba(255, 255, 255, 0.05);
 }
 
+body.light-theme .glass-nav-link:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
 .glass-nav-link.active {
     color: var(--bg-main);
     background: var(--accent-primary);
     font-weight: 600;
+}
+
+body.light-theme .glass-nav-link.active {
+    color: var(--bg-card);
+    /* White text on blue background */
+}
+
+body.light-theme .glass-nav-link.active:hover {
+    background: var(--accent-primary);
+    /* Prevents the grey hover override */
+    color: var(--bg-card);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.theme-toggle:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.theme-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+body.light-theme .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
 }
 
 /* Mobile responsive styles for glass navbar */
@@ -212,6 +290,12 @@ a {
     /* Stronger shadow */
 }
 
+body.light-theme .hero-badge {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
 .landing-hero .hero-title {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 800;
@@ -225,6 +309,10 @@ a {
     line-height: 1.1;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     /* Added subtle shadow */
+}
+
+body.light-theme .hero-title {
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
 }
 
 .hero-highlight {
@@ -249,8 +337,11 @@ a {
     line-height: 1.6;
     font-weight: 500;
     /* Medium weight */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    /* Text shadow for readability on iridescent bg */
+}
+
+body.light-theme .landing-hero .hero-subtitle {
+    color: var(--text-secondary);
+    text-shadow: none;
 }
 
 .hero-actions {
@@ -292,10 +383,20 @@ a {
     border: 1px solid var(--bg-card-hover);
 }
 
+body.light-theme .btn-secondary {
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--text-primary);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
 .btn-secondary:hover {
     background: var(--bg-card);
     border-color: var(--accent-primary);
     transform: translateY(-2px);
+}
+
+body.light-theme .btn-secondary:hover {
+    background: #ffffff;
 }
 
 
@@ -353,6 +454,12 @@ a {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .about-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
 }
 
 .about-card:hover {
@@ -441,6 +548,12 @@ a {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+body.light-theme .contribute-card {
+    background: rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+}
+
 .contribute-card:hover {
     border-color: rgba(136, 192, 208, 0.3);
     transform: translateY(-4px);
@@ -521,7 +634,7 @@ header::before {
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: #d8dee9;
+    color: var(--text-secondary);
     opacity: 0.9;
     max-width: 600px;
     margin: 0 auto 2rem;
@@ -549,6 +662,12 @@ header::before {
     backdrop-filter: blur(4px);
 }
 
+body.light-theme .stat-badge {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
 .stat-badge strong {
     color: var(--accent-primary);
     font-size: 1.1em;
@@ -564,6 +683,24 @@ header::before {
 .search-control {
     position: relative;
     width: 100%;
+}
+
+body.light-theme .search-control .search-input {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .search-control .search-input:focus {
+    background: #ffffff;
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+body.light-theme .search-shortcut {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-muted);
 }
 
 .search-icon {
@@ -727,7 +864,7 @@ header::before {
 }
 
 .download-btn:hover {
-    background: var(--accent-secondary);
+    /* background: var(--accent-secondary); Removed color shift */
     filter: brightness(1.1);
 }
 

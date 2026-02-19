@@ -1,4 +1,3 @@
-Question;Réponse
 Définition : Quand dit-on que la suite \(u\) est négligeable devant la suite \(v\) (noté \(u_n = o(v_n)\)) ? (Hypothèse : \(v\) ne s'annule pas à partir d'un certain rang);On dit que \(u\) est négligeable devant \(v\) si : \(\frac{u_n}{v_n} \xrightarrow[n \to +\infty]{} 0\).
 Proposition : Comparaison de croissances entre \((\ln n)^\beta\) et \(n^\alpha\) pour \(\alpha > 0\) et \(\beta \in \mathbb{R}\).;\((\ln n)^\beta \underset{n \to +\infty}{=} o(n^\alpha)\).
 Proposition : Comparaison de croissances entre \(n^\beta\) et \(e^{\alpha n}\) pour \(\alpha > 0\) et \(\beta \in \mathbb{R}\).;\(n^\beta \underset{n \to +\infty}{=} o(e^{\alpha n})\).

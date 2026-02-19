@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/GlassSurface.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Theme Script (Early load to prevent FOUC) -->
+    <script src="js/theme.js"></script>
 </head>
 
 <body>
@@ -18,6 +21,9 @@
             <a href="index.html" class="glass-nav-link">Accueil</a>
             <a href="decks.html" class="glass-nav-link active">Decks</a>
             <a href="https://github.com/CermP/anki-ptsi" target="_blank" class="glass-nav-link">GitHub</a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Basculer le thème">
+                <!-- Icon injected by JS -->
+            </button>
         </div>
     </nav>
 

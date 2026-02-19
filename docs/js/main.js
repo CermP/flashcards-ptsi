@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionCards = section.querySelectorAll('.deck-card');
             let hasVisibleCards = false;
 
+            const subject = section.querySelector('.subject-title').textContent.toLowerCase();
+
             sectionCards.forEach(card => {
                 const title = card.querySelector('.deck-name').textContent.toLowerCase();
-                // We can also search in subject if we want, but for now strict card matching
-                // const subject = section.querySelector('.subject-title').textContent.toLowerCase();
-                
-                if (title.includes(query)) {
+
+                if (title.includes(query) || subject.includes(query)) {
                     card.classList.remove('hidden');
                     hasVisibleCards = true;
                     visibleCount++;

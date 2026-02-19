@@ -22,6 +22,7 @@ precision highp float;
 
 uniform float uTime;
 uniform vec3 uColor;
+uniform float uIsLight;
 uniform vec3 uResolution;
 uniform vec2 uMouse;
 uniform float uAmplitude;
@@ -43,8 +44,15 @@ void main() {
   }
   d += uTime * 0.5 * uSpeed;
   vec3 col = vec3(cos(uv * vec2(d, a)) * 0.6 + 0.4, cos(a + d) * 0.5 + 0.5);
-  col = cos(col * cos(vec3(d, a, 2.5)) * 0.5 + 0.5) * uColor;
-  gl_FragColor = vec4(col, 1.0);
+  vec3 darkCol = cos(col * cos(vec3(d, a, 2.5)) * 0.5 + 0.5) * uColor;
+  
+  if (uIsLight > 0.5) {
+      // Light Mode: mix pastel white with the dark iridescent colors
+      vec3 lightBlend = mix(vec3(0.96, 0.98, 1.0), darkCol, 0.15);
+      gl_FragColor = vec4(lightBlend, 1.0);
+  } else {
+      gl_FragColor = vec4(darkCol, 1.0);
+  }
 }
 `;
 
@@ -55,9 +63,9 @@ void main() {
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Configuration
     const config = {
-        color: [0, 0.9, 1],
+        colorDark: [0, 0.9, 1],
+        colorLight: [0.1, 0.5, 1.0], // Vibrant light blue for light mode
         speed: prefersReducedMotion ? 0 : 1.0,
         amplitude: 0.1,
         mouseReact: false,
@@ -75,7 +83,25 @@ void main() {
     }
 
     const gl = renderer.gl;
-    gl.clearColor(0.18, 0.2, 0.25, 1); // Match --bg-main for seamless blend
+
+    function updateThemeColors() {
+        const isLight = document.body && document.body.classList.contains('light-theme');
+        if (isLight) {
+            gl.clearColor(0.94, 0.96, 0.98, 1); // matches light var(--bg-main)
+            if (program) {
+                program.uniforms.uColor.value.set(config.colorLight);
+                program.uniforms.uIsLight.value = 1.0;
+            }
+        } else {
+            gl.clearColor(0.18, 0.2, 0.25, 1); // matches var(--bg-main) #2e3440
+            if (program) {
+                program.uniforms.uColor.value.set(config.colorDark);
+                program.uniforms.uIsLight.value = 0.0;
+            }
+        }
+    }
+
+    updateThemeColors();
 
     function resize() {
         const scale = window.devicePixelRatio > 1 ? 0.75 : 1; // Reduce resolution on HiDPI for performance
@@ -99,7 +125,8 @@ void main() {
         fragment: fragmentShader,
         uniforms: {
             uTime: { value: 0 },
-            uColor: { value: new Color(...config.color) },
+            uColor: { value: new Color(...(document.body && document.body.classList.contains('light-theme') ? config.colorLight : config.colorDark)) },
+            uIsLight: { value: (document.body && document.body.classList.contains('light-theme')) ? 1.0 : 0.0 },
             uResolution: {
                 value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height),
             },
@@ -128,6 +155,11 @@ void main() {
     window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
         program.uniforms.uSpeed.value = e.matches ? 0 : 1.0;
     });
+
+    if (document.body) {
+        const observer = new MutationObserver(() => updateThemeColors());
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
 
     // Cleanup on page unload
     window.addEventListener('beforeunload', () => {
