@@ -106,8 +106,19 @@ def find_media_files(media_refs: List[str], media_subfolder: str) -> List[str]:
             if full_img_path not in create_package_media:
                 create_package_media.append(full_img_path)
         else:
-            print(f"      ⚠️ Image manquante : {img_name} (cherchée dans media/{media_subfolder}/)")
+            # Fallback direct search in media/
+            found_path = None
+            for root, _, files in os.walk(MEDIA_DIR):
+                if img_name in files:
+                    found_path = os.path.join(root, img_name)
+                    break
             
+            if found_path:
+                if found_path not in create_package_media:
+                    create_package_media.append(found_path)
+            else:
+                print(f"      ⚠️ Image manquante : {img_name} (introuvable dans media/)")
+                
     return create_package_media
 
 def generate_deck_package(csv_path: str, subject_folder: str) -> Tuple[bool, int, str]:

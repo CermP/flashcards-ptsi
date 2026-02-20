@@ -83,6 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
         flashcardFront.innerHTML = card.front;
         flashcardBack.innerHTML = card.back;
 
+        if (window.MathJax) {
+            MathJax.typesetPromise([flashcardFront, flashcardBack]).catch((err) => console.log('MathJax error: ', err));
+        }
+
         currentIdxEl.textContent = currentIndex + 1;
         totalCardsEl.textContent = currentCards.length;
 
