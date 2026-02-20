@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal();
 
             try {
-                const response = await fetch(previewUrl);
+                const response = await fetch(`${previewUrl}?t=${new Date().getTime()}`);
                 if (!response.ok) throw new Error("Preview not found");
 
                 const cards = await response.json();
