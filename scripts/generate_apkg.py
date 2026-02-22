@@ -21,6 +21,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 OUTPUT_DIR = os.path.join(BASE_DIR, "docs")
 PREVIEWS_DIR = os.path.join(OUTPUT_DIR, "previews")
 OUT_MEDIA_DIR = os.path.join(OUTPUT_DIR, "media")
+OUT_APKG_DIR = os.path.join(OUTPUT_DIR, "decks")
 
 # --- ANKI MODEL ---
 MODEL_ID = 1607392319
@@ -169,7 +170,7 @@ def generate_deck_package(csv_path: str, subject_folder: str) -> Tuple[bool, int
         print(f"   ⚠️ Erreur sauvegarde preview : {e}")
     
     # Save package
-    output_path = os.path.join(OUTPUT_DIR, output_filename)
+    output_path = os.path.join(OUT_APKG_DIR, output_filename)
     package = genanki.Package(deck)
     package.media_files = media_files
     
@@ -194,6 +195,8 @@ def main() -> None:
         os.makedirs(PREVIEWS_DIR)
     if not os.path.exists(OUT_MEDIA_DIR):
         os.makedirs(OUT_MEDIA_DIR)
+    if not os.path.exists(OUT_APKG_DIR):
+        os.makedirs(OUT_APKG_DIR)
         
     stats = {'processed': 0, 'success': 0, 'errors': 0}
     apkg_meta = {}

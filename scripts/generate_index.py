@@ -37,7 +37,8 @@ def collect_decks_info() -> Dict[str, List[Dict[str, str]]]:
         with open(meta_path, 'r', encoding='utf-8') as f:
             apkg_meta = json.load(f)
 
-    apkg_files = sorted(OUTPUT_DIR.glob("*.apkg"))
+    APKG_DIR = OUTPUT_DIR / "decks"
+    apkg_files = sorted(APKG_DIR.glob("*.apkg"))
     print(f"🔍 Fichiers .apkg trouvés : {len(apkg_files)}")
     
     for filepath in apkg_files:
@@ -63,7 +64,7 @@ def collect_decks_info() -> Dict[str, List[Dict[str, str]]]:
             'filename': filename,
             'size': get_file_size_str(filepath),
             'date': date.fromtimestamp(filepath.stat().st_mtime).strftime("%d/%m/%Y"),
-            'url': quote(filename),
+            'url': f"decks/{quote(filename)}",
             'cards': card_count
         }
         

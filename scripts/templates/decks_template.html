@@ -80,7 +80,7 @@
             </div>
             <div class="deck-grid">
                 {% for deck in decks %}
-                <div class="deck-card" id="deck-{{ deck.url | replace('.apkg', '') }}">
+                <div class="deck-card" id="deck-{{ deck.filename | replace('.apkg', '') }}">
                     <div class="deck-info">
                         <h3 class="deck-name">{{ deck.name }}</h3>
                         <div class="deck-meta">
@@ -91,7 +91,7 @@
                     </div>
                     <div class="deck-actions">
                         <button class="btn-icon copy-link-btn" aria-label="Copier le lien"
-                            data-deck-id="deck-{{ deck.url | replace('.apkg', '') }}" title="Copier le lien">
+                            data-deck-id="deck-{{ deck.filename | replace('.apkg', '') }}" title="Copier le lien">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -100,7 +100,7 @@
                             </svg>
                         </button>
                         <button class="btn btn-secondary btn-sm preview-btn"
-                            data-preview-url="previews/{{ deck.url | replace('.apkg', '.json') }}"
+                            data-preview-url="previews/{{ deck.filename | replace('.apkg', '.json') }}"
                             data-deck-title="{{ deck.name }}">Aperçu</button>
                         <a href="{{ deck.url }}" class="btn btn-primary btn-sm download-btn" download>Télécharger</a>
                     </div>
