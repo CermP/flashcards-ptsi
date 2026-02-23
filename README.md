@@ -42,16 +42,49 @@ Pour corriger une coquille ou une erreur :
 ## 🛠️ Structure du Projet
 
 ```mermaid
-graph TD;
-    A[flashcards-PTSI] --> B[decks/];
-    A --> C[media/];
-    A --> D[scripts/];
-    A --> E[docs/];
-    B -- CSV --> F[Maths];
-    B -- CSV --> G[Physique];
-    C -- Images --> H[assets];
-    D -- Python --> I[Outils];
-    E -- HTML --> J[Site Web];
+graph TD
+    subgraph Dépôt["Dépôt flashcards-PTSI"]
+        direction TB
+        
+        subgraph Données["Sources (Decks & Médias)"]
+            DECKS("📁 decks/<br>Fichiers CSV")
+            MEDIA("🖼️ media/<br>Images des cartes")
+        end
+        
+        subgraph Outils["Automatisation (scripts/)"]
+            EXPORT("⚙️ export_with_media.py")
+            IMPORT("⚙️ imports_decks.py")
+            GEN_APKG("📦 generate_apkg.py")
+            GEN_INDEX("🌐 generate_index.py")
+        end
+
+        subgraph Site["Site Web (docs/ GitHub Pages)"]
+            APKG("🎁 decks/<br>Paquets .apkg")
+            PREVIEW("📄 previews/<br>Aperçus JSON")
+            HTML("🌍 Pages HTML<br>Interface du site")
+        end
+    end
+
+    ANKI[("Application Anki<br>(En local)")]
+
+    %% Flux Local Anki <-> Dépôt
+    ANKI -. "Exporte" .-> EXPORT
+    EXPORT --> DECKS
+    EXPORT --> MEDIA
+    
+    DECKS --> IMPORT
+    MEDIA --> IMPORT
+    IMPORT -. "Importe" .-> ANKI
+
+    %% Flux Génération du Site
+    DECKS ==> GEN_APKG
+    MEDIA ==> GEN_APKG
+    
+    GEN_APKG ==> APKG
+    GEN_APKG ==> PREVIEW
+    
+    APKG -. "Définit" .-> GEN_INDEX
+    GEN_INDEX ==> HTML
 ```
 
 ## 📜 Scripts Disponibles
