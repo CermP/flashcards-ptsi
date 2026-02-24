@@ -135,7 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     closeBtn.addEventListener('click', closeModal);
+
+    let dragPreventClick = false; // Flag to prevent modal close after drag
+
     modal.addEventListener('click', (e) => {
+        if (dragPreventClick) return;
         if (e.target === modal) closeModal(); // direct click on overlay
     });
 
@@ -160,19 +164,21 @@ document.addEventListener('DOMContentLoaded', () => {
         flashcard.classList.toggle('flipped', isFlipped);
     }
 
-    function goToNextCard() {
+    function goToNextCard(instant = false) {
         if (!nextBtn.disabled) {
             currentIndex++;
             resetCard();
-            setTimeout(updateCardDisplay, 150);
+            if (instant) updateCardDisplay();
+            else setTimeout(updateCardDisplay, 150);
         }
     }
 
-    function goToPrevCard() {
+    function goToPrevCard(instant = false) {
         if (!prevBtn.disabled) {
             currentIndex--;
             resetCard();
-            setTimeout(updateCardDisplay, 150);
+            if (instant) updateCardDisplay();
+            else setTimeout(updateCardDisplay, 150);
         }
     }
 
@@ -183,30 +189,120 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', goToNextCard);
     prevBtn.addEventListener('click', goToPrevCard);
 
-    // --- SWIPE LOGIC (Touch & Trackpad) ---
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const SWIPE_THRESHOLD = 50;
+    // --- DRAG / SWIPE LOGIC (Mouse & Touch) ---
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    const SWIPE_THRESHOLD = 150;
 
-    flashcard.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    flashcard.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-        const diffX = touchEndX - touchStartX;
-        if (diffX > SWIPE_THRESHOLD) {
-            // Swiped right -> Previous card
-            goToPrevCard();
-        } else if (diffX < -SWIPE_THRESHOLD) {
-            // Swiped left -> Next card
-            goToNextCard();
-        }
+    function handleDragStart(e) {
+        if (e.target.closest('button')) return; // ignore buttons
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        flashcard.style.transition = 'none'; // remove transition during drag
     }
+
+    function handleDragMove(e) {
+        if (!isDragging) return;
+        const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const diffX = x - startX;
+
+        // Prevent vertical scrolling while swiping horizontally on touch devices
+        if (e.type.includes('touch') && Math.abs(diffX) > 10) {
+            e.preventDefault();
+        }
+
+        currentX = diffX;
+        let rotation = currentX * 0.02; // Reduced rotation: 0.02 deg per px
+        if (isFlipped) rotation = -rotation; // Invert rotation for the back of the card
+        const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+        flashcard.style.transform = `translateX(${currentX}px) ${baseRotation} rotateZ(${rotation}deg)`;
+    }
+
+    function handleDragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+
+        if (Math.abs(currentX) > 5) {
+            dragPreventClick = true;
+            setTimeout(() => dragPreventClick = false, 50);
+        }
+
+        // Restore transition for spring-back or exit animation
+        flashcard.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+        if (currentX > SWIPE_THRESHOLD && !prevBtn.disabled) {
+            // Swiped right -> Previous card
+            const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+            const exitRotation = isFlipped ? -10 : 10;
+            flashcard.style.transform = `translateX(150vw) ${baseRotation} rotateZ(${exitRotation}deg)`;
+            setTimeout(() => {
+                flashcard.style.transition = 'none';
+                goToPrevCard(true); // instant update
+
+                // Elegant entrance
+                flashcard.style.transform = `scale(0.85)`;
+                flashcard.style.opacity = '0';
+                void flashcard.offsetWidth; // force reflow
+
+                flashcard.style.transition = 'transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out';
+                flashcard.style.transform = `scale(1)`;
+                flashcard.style.opacity = '1';
+
+                setTimeout(() => {
+                    flashcard.style.transition = '';
+                    flashcard.style.transform = '';
+                    flashcard.style.opacity = '';
+                }, 300);
+            }, 300);
+        } else if (currentX < -SWIPE_THRESHOLD && !nextBtn.disabled) {
+            // Swiped left -> Next card
+            const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+            const exitRotation = isFlipped ? 10 : -10;
+            flashcard.style.transform = `translateX(-150vw) ${baseRotation} rotateZ(${exitRotation}deg)`;
+            setTimeout(() => {
+                flashcard.style.transition = 'none';
+                goToNextCard(true); // instant update
+
+                // Elegant entrance
+                flashcard.style.transform = `scale(0.85)`;
+                flashcard.style.opacity = '0';
+                void flashcard.offsetWidth; // force reflow
+
+                flashcard.style.transition = 'transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out';
+                flashcard.style.transform = `scale(1)`;
+                flashcard.style.opacity = '1';
+
+                setTimeout(() => {
+                    flashcard.style.transition = '';
+                    flashcard.style.transform = '';
+                    flashcard.style.opacity = '';
+                }, 300);
+            }, 300);
+        } else {
+            // Snap back
+            resetCardPosition();
+            setTimeout(() => {
+                if (!isDragging) flashcard.style.transition = ''; // clear inline transition after snap
+            }, 500);
+        }
+        currentX = 0;
+    }
+
+    function resetCardPosition() {
+        flashcard.style.transform = '';
+    }
+
+    // Mouse Events
+    flashcard.addEventListener('mousedown', handleDragStart);
+    window.addEventListener('mousemove', handleDragMove, { passive: false });
+    window.addEventListener('mouseup', handleDragEnd);
+
+    // Touch Events
+    flashcard.addEventListener('touchstart', handleDragStart, { passive: true });
+    window.addEventListener('touchmove', handleDragMove, { passive: false });
+    window.addEventListener('touchend', handleDragEnd);
+    window.addEventListener('touchcancel', handleDragEnd);
 
     // Trackpad swipe logic
     let wheelTimeout;
@@ -215,18 +311,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 20) {
             if (wheelTimeout) return; // Prevent multiple triggers for one swipe
 
-            if (e.deltaX > 0) {
-                // Scrolled right (natural swipe left) -> Next card
-                goToNextCard();
-            } else {
-                // Scrolled left (natural swipe right) -> Previous card
-                goToPrevCard();
-            }
+            if (e.deltaX > 0) goToNextCard();
+            else goToPrevCard();
 
             // Debounce trackpad events
-            wheelTimeout = setTimeout(() => {
-                wheelTimeout = null;
-            }, 600);
+            wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 600);
         }
     }, { passive: true });
 });
