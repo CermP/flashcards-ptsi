@@ -159,9 +159,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function toggleFlip() {
+    function toggleFlip(withEffect = false) {
         isFlipped = !isFlipped;
-        flashcard.classList.toggle('flipped', isFlipped);
+
+        if (withEffect) {
+            // Add a small pop effect when flipping via click
+            flashcard.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            const popScale = `scale(1.01)`; // Reduced from 1.05 to make it very subtle
+            const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+            flashcard.style.transform = `${popScale} ${baseRotation}`;
+
+            setTimeout(() => {
+                flashcard.style.transform = baseRotation;
+                setTimeout(() => {
+                    flashcard.style.transition = '';
+                    flashcard.classList.toggle('flipped', isFlipped);
+                }, 300);
+            }, 100); // Also reduced timeout slightly for a snappier feel
+        } else {
+            flashcard.classList.toggle('flipped', isFlipped);
+        }
     }
 
     function goToNextCard(instant = false) {
@@ -192,50 +209,90 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- DRAG / SWIPE LOGIC (Mouse & Touch) ---
     let isDragging = false;
     let startX = 0;
+    let startY = 0;
     let currentX = 0;
-    const SWIPE_THRESHOLD = 150;
+    let currentY = 0;
+    let startTime = 0;
+    const SWIPE_DISTANCE_THRESHOLD = 100; // Lowered from 150
+    const SWIPE_VELOCITY_THRESHOLD = 0.5; // pixels per ms
 
     function handleDragStart(e) {
         if (e.target.closest('button')) return; // ignore buttons
         isDragging = true;
         startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        flashcard.style.transition = 'none'; // remove transition during drag
+        startY = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
+        startTime = Date.now();
+        flashcard.style.transition = 'transform 0.1s ease-out'; // quick transition for the press-down scale
+
+        // Add a slight press-down effect
+        const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+        flashcard.style.transform = `scale(0.98) ${baseRotation}`;
+
+        setTimeout(() => {
+            if (isDragging) flashcard.style.transition = 'none'; // remove transition during actual drag movement
+        }, 100);
     }
 
     function handleDragMove(e) {
         if (!isDragging) return;
         const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const y = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
         const diffX = x - startX;
+        const diffY = y - startY;
 
         // Prevent vertical scrolling while swiping horizontally on touch devices
-        if (e.type.includes('touch') && Math.abs(diffX) > 10) {
+        // Only if horizontal movement is greater than vertical
+        if (e.type.includes('touch') && Math.abs(diffX) > Math.abs(diffY)) {
             e.preventDefault();
         }
 
         currentX = diffX;
+        currentY = diffY * 0.5; // Diminish vertical movement distance for feel
+
         let rotation = currentX * 0.02; // Reduced rotation: 0.02 deg per px
         if (isFlipped) rotation = -rotation; // Invert rotation for the back of the card
+
         const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-        flashcard.style.transform = `translateX(${currentX}px) ${baseRotation} rotateZ(${rotation}deg)`;
+        flashcard.style.transform = `translate(${currentX}px, ${currentY}px) ${baseRotation} rotateZ(${rotation}deg)`;
     }
 
     function handleDragEnd() {
         if (!isDragging) return;
         isDragging = false;
 
+        const elapsedTime = Date.now() - startTime;
+        const velocityX = Math.abs(currentX) / elapsedTime; // px per ms
+
+        // Calculate if threshold is met natively by distance OR by velocity
+        const isSwipedRight = (currentX > SWIPE_DISTANCE_THRESHOLD) || (currentX > 30 && velocityX > SWIPE_VELOCITY_THRESHOLD);
+        const isSwipedLeft = (currentX < -SWIPE_DISTANCE_THRESHOLD) || (currentX < -30 && velocityX > SWIPE_VELOCITY_THRESHOLD);
+
+        const isTap = Math.abs(currentX) < 10 && Math.abs(currentY) < 10 && elapsedTime < 400;
+
         if (Math.abs(currentX) > 5) {
             dragPreventClick = true;
             setTimeout(() => dragPreventClick = false, 50);
         }
 
+        if (isTap) {
+            // It was a click/tap, not a drag. Flip the card.
+            flashcard.style.transform = '';
+            flashcard.style.transition = '';
+            toggleFlip(true);
+            currentX = 0;
+            currentY = 0;
+            return;
+        }
+
         // Restore transition for spring-back or exit animation
         flashcard.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
-        if (currentX > SWIPE_THRESHOLD && !prevBtn.disabled) {
+        if (isSwipedRight && !prevBtn.disabled) {
             // Swiped right -> Previous card
             const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
             const exitRotation = isFlipped ? -10 : 10;
-            flashcard.style.transform = `translateX(150vw) ${baseRotation} rotateZ(${exitRotation}deg)`;
+            const exitY = currentY * 2; // Let diagonal movement continue out of screen
+            flashcard.style.transform = `translate(150vw, ${exitY}px) ${baseRotation} rotateZ(${exitRotation}deg)`;
             setTimeout(() => {
                 flashcard.style.transition = 'none';
                 goToPrevCard(true); // instant update
@@ -255,11 +312,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     flashcard.style.opacity = '';
                 }, 300);
             }, 300);
-        } else if (currentX < -SWIPE_THRESHOLD && !nextBtn.disabled) {
+        } else if (isSwipedLeft && !nextBtn.disabled) {
             // Swiped left -> Next card
             const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
             const exitRotation = isFlipped ? 10 : -10;
-            flashcard.style.transform = `translateX(-150vw) ${baseRotation} rotateZ(${exitRotation}deg)`;
+            const exitY = currentY * 2;
+            flashcard.style.transform = `translate(-150vw, ${exitY}px) ${baseRotation} rotateZ(${exitRotation}deg)`;
             setTimeout(() => {
                 flashcard.style.transition = 'none';
                 goToNextCard(true); // instant update
@@ -287,6 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }
         currentX = 0;
+        currentY = 0;
     }
 
     function resetCardPosition() {
