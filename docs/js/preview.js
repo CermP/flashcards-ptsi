@@ -144,10 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (e.key === 'Escape') closeModal();
         else if (e.key === 'ArrowRight') {
-            if (!nextBtn.disabled) { currentIndex++; resetCard(); setTimeout(updateCardDisplay, 150); }
+            goToNextCard();
         }
         else if (e.key === 'ArrowLeft') {
-            if (!prevBtn.disabled) { currentIndex--; resetCard(); setTimeout(updateCardDisplay, 150); }
+            goToPrevCard();
         }
         else if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
@@ -160,18 +160,73 @@ document.addEventListener('DOMContentLoaded', () => {
         flashcard.classList.toggle('flipped', isFlipped);
     }
 
+    function goToNextCard() {
+        if (!nextBtn.disabled) {
+            currentIndex++;
+            resetCard();
+            setTimeout(updateCardDisplay, 150);
+        }
+    }
+
+    function goToPrevCard() {
+        if (!prevBtn.disabled) {
+            currentIndex--;
+            resetCard();
+            setTimeout(updateCardDisplay, 150);
+        }
+    }
+
     flipBtn.addEventListener('click', toggleFlip);
-    flashcard.addEventListener('click', toggleFlip);
+    // Removed flashcard click event to flip, to make swiping easier
+    // flashcard.addEventListener('click', toggleFlip);
 
-    nextBtn.addEventListener('click', () => {
-        currentIndex++;
-        resetCard();
-        setTimeout(updateCardDisplay, 150);
-    });
+    nextBtn.addEventListener('click', goToNextCard);
+    prevBtn.addEventListener('click', goToPrevCard);
 
-    prevBtn.addEventListener('click', () => {
-        currentIndex--;
-        resetCard();
-        setTimeout(updateCardDisplay, 150);
-    });
+    // --- SWIPE LOGIC (Touch & Trackpad) ---
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const SWIPE_THRESHOLD = 50;
+
+    flashcard.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    flashcard.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const diffX = touchEndX - touchStartX;
+        if (diffX > SWIPE_THRESHOLD) {
+            // Swiped right -> Previous card
+            goToPrevCard();
+        } else if (diffX < -SWIPE_THRESHOLD) {
+            // Swiped left -> Next card
+            goToNextCard();
+        }
+    }
+
+    // Trackpad swipe logic
+    let wheelTimeout;
+    flashcard.addEventListener('wheel', (e) => {
+        // Only react to horizontal scrolling mostly
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 20) {
+            if (wheelTimeout) return; // Prevent multiple triggers for one swipe
+
+            if (e.deltaX > 0) {
+                // Scrolled right (natural swipe left) -> Next card
+                goToNextCard();
+            } else {
+                // Scrolled left (natural swipe right) -> Previous card
+                goToPrevCard();
+            }
+
+            // Debounce trackpad events
+            wheelTimeout = setTimeout(() => {
+                wheelTimeout = null;
+            }, 600);
+        }
+    }, { passive: true });
 });
