@@ -67,8 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetCard() {
-        isFlipped = false;
-        flashcard.classList.remove('flipped');
+        if (isFlipped) {
+            isFlipped = false;
+            flashcard.style.transition = 'none'; // Ensure reset is instant
+            flashcard.classList.remove('flipped');
+        }
         // Small delay to allow flip animation to start before content changes
         setTimeout(() => {
             flashcardFront.scrollTop = 0;
@@ -159,26 +162,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    let isAnimatingFlip = false;
+    let exitTimeout = null;
+    let entranceTimeout = null;
+
     function toggleFlip(withEffect = false) {
+        if (isAnimatingFlip) return;
+        isAnimatingFlip = true;
+
         isFlipped = !isFlipped;
-
-        if (withEffect) {
-            // Add a small pop effect when flipping via click
-            flashcard.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            const popScale = `scale(1.01)`; // Reduced from 1.05 to make it very subtle
-            const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-            flashcard.style.transform = `${popScale} ${baseRotation}`;
-
-            setTimeout(() => {
-                flashcard.style.transform = baseRotation;
-                setTimeout(() => {
-                    flashcard.style.transition = '';
-                    flashcard.classList.toggle('flipped', isFlipped);
-                }, 300);
-            }, 100); // Also reduced timeout slightly for a snappier feel
-        } else {
-            flashcard.classList.toggle('flipped', isFlipped);
-        }
+        flashcard.style.transition = 'none'; // Instant flip, no animation
+        flashcard.style.transform = '';
+        flashcard.classList.toggle('flipped', isFlipped);
+        setTimeout(() => { isAnimatingFlip = false; }, 50); // Minimal lock
     }
 
     function goToNextCard(instant = false) {
@@ -218,6 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleDragStart(e) {
         if (e.target.closest('button')) return; // ignore buttons
+        if (isAnimatingFlip) return; // Prevent drag during a flip
+
+        // Interrupt ongoing entrance/exit animations
+        clearTimeout(exitTimeout);
+        clearTimeout(entranceTimeout);
+
         isDragging = true;
         startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
         startY = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
@@ -227,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add a slight press-down effect
         const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
         flashcard.style.transform = `scale(0.98) ${baseRotation}`;
+        flashcard.style.opacity = '1'; // ensure it's visible if interrupted
 
         setTimeout(() => {
             if (isDragging) flashcard.style.transition = 'none'; // remove transition during actual drag movement
@@ -275,10 +278,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (isTap) {
-            // It was a click/tap, not a drag. Flip the card.
+            // It was a click/tap, not a drag. Flip the card instantly.
             flashcard.style.transform = '';
-            flashcard.style.transition = '';
-            toggleFlip(true);
+            flashcard.style.transition = 'none';
+            toggleFlip();
             currentX = 0;
             currentY = 0;
             return;
@@ -292,51 +295,57 @@ document.addEventListener('DOMContentLoaded', () => {
             const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
             const exitRotation = isFlipped ? -10 : 10;
             const exitY = currentY * 2; // Let diagonal movement continue out of screen
-            flashcard.style.transform = `translate(150vw, ${exitY}px) ${baseRotation} rotateZ(${exitRotation}deg)`;
-            setTimeout(() => {
-                flashcard.style.transition = 'none';
-                goToPrevCard(true); // instant update
+            flashcard.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            flashcard.style.transform = `translate(120vw, ${exitY}px) ${baseRotation} rotateZ(${exitRotation}deg)`;
 
-                // Elegant entrance
-                flashcard.style.transform = `scale(0.85)`;
+            exitTimeout = setTimeout(() => {
+                flashcard.style.transition = 'none';
+                goToPrevCard(true); // instant update (which calls resetCard)
+
+                // Entrance animation - always front facing (0deg) since resetCard applied
+                const enterRotation = 'rotateY(0deg)';
+                flashcard.style.transform = `scale(0.85) ${enterRotation}`;
                 flashcard.style.opacity = '0';
                 void flashcard.offsetWidth; // force reflow
 
-                flashcard.style.transition = 'transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out';
-                flashcard.style.transform = `scale(1)`;
+                flashcard.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
+                flashcard.style.transform = `scale(1) ${enterRotation}`;
                 flashcard.style.opacity = '1';
 
-                setTimeout(() => {
+                entranceTimeout = setTimeout(() => {
                     flashcard.style.transition = '';
                     flashcard.style.transform = '';
                     flashcard.style.opacity = '';
-                }, 300);
-            }, 300);
+                }, 200);
+            }, 250); // Faster exit
         } else if (isSwipedLeft && !nextBtn.disabled) {
             // Swiped left -> Next card
             const baseRotation = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
             const exitRotation = isFlipped ? 10 : -10;
             const exitY = currentY * 2;
-            flashcard.style.transform = `translate(-150vw, ${exitY}px) ${baseRotation} rotateZ(${exitRotation}deg)`;
-            setTimeout(() => {
-                flashcard.style.transition = 'none';
-                goToNextCard(true); // instant update
+            flashcard.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            flashcard.style.transform = `translate(-120vw, ${exitY}px) ${baseRotation} rotateZ(${exitRotation}deg)`;
 
-                // Elegant entrance
-                flashcard.style.transform = `scale(0.85)`;
+            exitTimeout = setTimeout(() => {
+                flashcard.style.transition = 'none';
+                goToNextCard(true); // instant update (which calls resetCard)
+
+                // Entrance animation - always front facing (0deg) since resetCard applied
+                const enterRotation = 'rotateY(0deg)';
+                flashcard.style.transform = `scale(0.85) ${enterRotation}`;
                 flashcard.style.opacity = '0';
                 void flashcard.offsetWidth; // force reflow
 
-                flashcard.style.transition = 'transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out';
-                flashcard.style.transform = `scale(1)`;
+                flashcard.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
+                flashcard.style.transform = `scale(1) ${enterRotation}`;
                 flashcard.style.opacity = '1';
 
-                setTimeout(() => {
+                entranceTimeout = setTimeout(() => {
                     flashcard.style.transition = '';
                     flashcard.style.transform = '';
                     flashcard.style.opacity = '';
-                }, 300);
-            }, 300);
+                }, 200);
+            }, 250); // Faster exit
         } else {
             // Snap back
             resetCardPosition();
