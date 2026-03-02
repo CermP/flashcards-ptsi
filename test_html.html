@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="test"></div>
+<script>
+  // Simulate EXACTLY what the browser does
+  const data = JSON.parse('{"front": "A \\\\times B"}');
+  document.getElementById("test").innerHTML = data.front;
+  console.log("INNER HTML BEFORE MATHJAX: " + document.getElementById("test").innerHTML);
+</script>
+</body>
+</html>

@@ -187,22 +187,19 @@
 
                 if (text) {
                     new BlurText(text, {
-                        delay: 40,
                         animateBy: 'words',
                         direction: 'top',
-                        stepDuration: 300,
-                        rootMargin: '0px 0px -28% 0px'
+                        startOffset: 0.95, // Commence dès l'apparition en bas de l'écran
+                        scrollRange: 0.4   // Etalé sur 40% de la hauteur du scroll
                     });
                 }
 
                 if (author) {
                     new BlurText(author, {
-                        delay: 30,
-                        animateBy: 'letters', // Letters for the author name for contrast
+                        animateBy: 'letters',
                         direction: 'top',
-                        stepDuration: 300,
-                        threshold: 0.5, // Trigger slightly later/separate
-                        rootMargin: '0px 0px -28% 0px'
+                        startOffset: 0.85, // Commence légèrement plus tard pour l'auteur
+                        scrollRange: 0.4
                     });
                 }
             </script>
