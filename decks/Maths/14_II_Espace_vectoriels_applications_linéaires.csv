@@ -1,0 +1,26 @@
+Quelle est la définition d'une application linéaire \(f : E \rightarrow F\) ?;C'est une application vérifiant \(\forall (x, y) \in E^2\), \(\forall \lambda \in \mathbb{K}\), \(f(\lambda \cdot x + y) = \lambda f(x) + f(y)\).
+Quelles sont les propriétés élémentaires d'une application linéaire \(f : E \rightarrow F\) ?;On a \(f(0_E) = 0_F\), \(\forall x \in E\), \(f(-x) = -f(x)\), et \(f\left( \sum_{i=1}^n \lambda_i \cdot x_i \right) = \sum_{i=1}^n \lambda_i \cdot f(x_i)\).
+Comment note-t-on l'ensemble des applications linéaires de \(E\) dans \(F\) ?;L'ensemble est noté \(\mathcal{L}(E, F)\).
+Qu'est-ce qu'un endomorphisme de \(E\) et comment note-t-on leur ensemble ?;C'est une application linéaire de \(E\) dans \(E\). Leur ensemble est noté \(\mathcal{L}(E)\).
+Qu'est-ce qu'une forme linéaire sur \(E\) ?;C'est une application linéaire de \(E\) dans \(\mathbb{K}\).
+Qu'est-ce qu'un isomorphisme de \(E\) dans \(F\) ?;C'est une application linéaire et bijective de \(E\) dans \(F\).
+Qu'est-ce qu'un automorphisme de \(E\) et comment note-t-on leur ensemble ?;C'est une application à la fois endomorphisme et isomorphisme de \(E\). Leur ensemble est noté \(GL(E)\).
+Comment définit-on le noyau \(Ker(f)\) d'une application linéaire \(f : E \rightarrow F\) ?;C'est l'ensemble \(Ker(f) = \{ x \in E / f(x) = 0_F \}\). C'est un sous-espace vectoriel de \(E\).
+Comment définit-on l'image \(Im(f)\) d'une application linéaire \(f : E \rightarrow F\) ?;C'est l'ensemble \(Im(f) = \{ f(x) / x \in E \} = \{ y \in F / \exists x \in E, y = f(x) \}\). C'est un sous-espace vectoriel de \(F\).
+Que peut-on dire de l'image directe d'un sev \(A\) de \(E\) et de l'image réciproque d'un sev \(B\) de \(F\) par \(f \in \mathcal{L}(E, F)\) ?;\(f(A)\) est un sous-espace vectoriel de \(F\), et \(f^{-1}(B)\) est un sous-espace vectoriel de \(E\).
+Quelle est l'image d'une famille génératrice \((v_1, \dots, v_n)\) de \(E\) par une application linéaire \(f\) ?;La famille \((f(v_1), \dots, f(v_n))\) est une famille génératrice de \(Im(f)\).
+À quelle condition nécessaire et suffisante une application linéaire \(f\) est-elle injective ?;L'application linéaire \(f\) est injective si et seulement si \(Ker(f) = \{ 0_E \}\).
+À quelle condition nécessaire et suffisante une application linéaire \(f : E \rightarrow F\) est-elle surjective ?;L'application linéaire \(f\) est surjective si et seulement si \(Im(f) = F\).
+Que peut-on dire d'une combinaison linéaire d'applications linéaires \(\lambda \cdot f + g\) ?;C'est une application linéaire de \(E\) dans \(F\).
+Quelle est la structure algébrique de l'ensemble \(\mathcal{L}(E, F)\) ?;C'est un sous-espace vectoriel de \(\mathcal{F}(E, F)\). En particulier, c'est un \(\mathbb{K}\)-espace vectoriel.
+Que peut-on dire de la composée \(g \circ f\) de deux applications linéaires ?;La composée \(g \circ f\) est une application linéaire de \(E\) dans \(G\).
+Quelles sont les propriétés de composition d'applications linéaires ?;On a \((\lambda_1 g_1 + \lambda_2 g_2) \circ f = \lambda_1 (g_1 \circ f) + \lambda_2 (g_2 \circ f)\) et \(g \circ (\lambda_1 f_1 + \lambda_2 f_2) = \lambda_1 (g \circ f_1) + \lambda_2 (g \circ f_2)\).
+Que donne la formule du binôme de Newton pour \((f, g) \in (\mathcal{L}(E))^2\) qui commutent (\(f \circ g = g \circ f\)) ?;Pour tout \(n \in \mathbb{N}\), on a \((f + g)^n = \sum_{k=0}^n \binom{n}{k} f^k \circ g^{n-k} = \sum_{k=0}^n \binom{n}{k} f^{n-k} \circ g^k\).
+Que peut-on dire de la composée de deux isomorphismes ?;Une composée d'isomorphismes est un isomorphisme.
+Soit \(f\) un isomorphisme de \(E\) dans \(F\). Que peut-on dire de sa bijection réciproque \(f^{-1}\) ?;\(f^{-1} : F \rightarrow E\) est linéaire. C'est donc un isomorphisme.
+Comment définit-on la projection sur un sous-espace \(F\) parallèlement à un sous-espace \(G\) supplémentaires dans \(E\) ?;C'est l'application de \(E\) dans \(E\) qui, à tout \(x = u + v\) (avec \(u \in F\) et \(v \in G\)), associe l'unique vecteur \(u\).
+Quelles sont les propriétés d'une projection \(p\) sur \(F\) parallèlement à \(G\) ?;a) \(p \in \mathcal{L}(E)\). b) \(p \circ p = p\). c) \(F = Im(p) = Ker(p - id)\) et \(G = Ker(p)\).
+Quelle est la caractérisation d'un projecteur \(p \in \mathcal{L}(E)\) ?;Si \(p \circ p = p\), alors \(p\) est un projecteur. De plus, \(Im(p)\) et \(Ker(p)\) sont supplémentaires et \(p\) est la projection sur \(Im(p)\) parallèlement à \(Ker(p)\).
+Comment définit-on la symétrie par rapport à un sous-espace \(F\) parallèlement à un sous-espace \(G\) supplémentaires dans \(E\) ?;C'est l'application de \(E\) dans \(E\) qui, à tout \(x = u + v\) (avec \(u \in F\) et \(v \in G\)), associe le vecteur \(u - v\).
+Quelles sont les propriétés d'une symétrie \(s\) par rapport à \(F\) parallèlement à \(G\) ?;a) \(s \in \mathcal{L}(E)\). b) \(s \circ s = id_E\). c) \(F = \{ x \in E, s(x) = x \} = Ker(s - id_E)\) et \(G = \{ x \in E, s(x) = -x \} = Ker(s + id_E)\).
+Quelle est la caractérisation d'une symétrie \(s \in \mathcal{L}(E)\) ?;Si \(s \circ s = id_E\), alors \(s\) est une symétrie. Les espaces \(Ker(s - id_E)\) et \(Ker(s + id_E)\) sont supplémentaires et \(s\) est la symétrie par rapport à \(Ker(s - id_E)\) parallèlement à \(Ker(s + id_E)\).
