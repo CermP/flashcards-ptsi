@@ -1,4 +1,3 @@
-Question;Réponse
 Qu'appelle-t-on univers d'une expérience aléatoire ?;L'univers est l'ensemble de toutes les issues possibles.
 Qu'est-ce qu'un événement dans le cadre d'un univers fini ?;Un événement est une partie de l'univers \(\Omega\).
 Quand dit-on que deux événements \(A\) et \(B\) sont incompatibles ?;Lorsque \(A \cap B = \emptyset\), c'est-à-dire qu'ils ne peuvent pas se réaliser en même temps (ils sont disjoints en tant qu'ensembles).
